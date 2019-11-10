@@ -1,4 +1,4 @@
-apiVersion: skaffold/v1beta2
+apiVersion: skaffold/v1
 kind: Config
 build:
   local:
@@ -9,9 +9,13 @@ build:
       docker:
         dockerfile: Dockerfile.dev
       sync:
-        "**/*.js": .
-        "**/*.css": .
-        "**/*.html": .
+        manual:
+          - src: "client/src/**/*.js"
+            dest: .
+          - src: "client/src/**/*.css"
+            dest: .
+          - src: "client/src/**/*.html"
+            dest: .
 deploy:
   kubectl:
     manifests:
